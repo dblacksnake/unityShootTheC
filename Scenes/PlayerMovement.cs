@@ -32,11 +32,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerRotationControler();
         playerMove();
         playerShoot(projectiles);
        
-
     }
 
     void playerMove(){
@@ -58,24 +56,24 @@ public class PlayerMovement : MonoBehaviour
                 move.y = jumpHeight ;
             }
         }
-      
+
+       
+        //this.projectiles.trnasform.poso = transform.TransformDirection(Vector3(0, 0, 2.5f));
+
         //transform.Translate(Vector3.forward * Time.deltaTime);
         //move.y = 0;
         move.y += gravityValue * Time.deltaTime;
         player.Move(move * Time.deltaTime * playerSpeed);
     }
 
-    void playerRotationControler()
- {
-    // if(player.transform.rotation.y)
+     void playerShoot(GameObject projectiles){
+        Vector3 firePointPosition = firePoint.transform.position;
+        Vector3 firePointRotation = firePoint.transform.TransformDirection(firePointPosition);
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameObject projectileClone =  Instantiate(this.projectiles, firePointPosition , Quaternion.Euler(firePointRotation));
+            projectileClone.GetComponent<Rigidbody>().AddForce(transform.forward * 5000);
+        }
 
- }
-
- void playerShoot(GameObject projectiles){
-     Vector3 firePointPosition = firePoint.transform.position;
-     firePointPosition = firePoint.transform.TransformDirection(firePointPosition);
-     if(Input.GetButtonDown("Fire1")){
-         Instantiate(this.projectiles,firePointPosition,Quaternion.Euler(0,90,90));
-     }
- }
+    }
 }

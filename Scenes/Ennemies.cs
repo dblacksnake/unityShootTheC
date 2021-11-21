@@ -23,7 +23,8 @@ public class Ennemies : MonoBehaviour
        for(var i = 0 ; i <  ennemies.Length;i++){
             ennemies[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             ennemies[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(0.5f,1.5f), Random.Range(-100.0f, 100.0f));
-            ennemies[i].name = $"ennemie{i}"; 
+            ennemies[i].name = $"ennemie{i}";
+            ennemies[i].GetComponent<Rigidbody>();
 
         }
     }
